@@ -22,6 +22,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 					$admin = new admin();
 					$admin->deleteProductDatabase($_POST['masp']);
 				}
+				if ($_GET['get'] == 'export') {
+					$export = new export();
+					$export->exportDataProducts();
+					echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=productList"/>';
+				}
 			}
 			include_once "View/Admin/productList.php";
 			break;
@@ -51,12 +56,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 								$image = $nameImage . "." . $imageExtension;
 
 								$admin = new admin();
-								$admin->addProductDatabase($productName, $category, $image, $price, $sale, $instock, $selled, $rate, $like, $descriptionShort, $descriptionLong);
-
-								$saveImage = new addImageProduct();
-								$saveImage->saveImageProduct($_FILES['image'], $productName);
-								echo "<script> alert('Thêm sản phẩm thành công') </script>";
-								echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=addProduct"/>';
+								$checkAddProduct = $admin->addProductDatabase($productName, $category, $image, $price, $sale, $instock, $selled, $rate, $like, $descriptionShort, $descriptionLong);
+								if ($checkAddProduct) {
+									$saveImage = new addImage();
+									$saveImage->saveImageProduct($_FILES['image'], $productName);
+									echo "<script> alert('Thêm sản phẩm thành công') </script>";
+									echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=addProduct"/>';
+								} else {
+									echo "<script> alert('Đã xãy ra lỗi') </script>";
+									include_once "View/Admin/addProduct.php";
+								}
 							} else {
 								echo "<script> alert('Tên sản phẩm đã tồn tại') </script>";
 								include_once "View/Admin/addProduct.php";
@@ -64,10 +73,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 						}
 					}
 				}
+				include_once "View/Admin/addProduct.php";
 			} else {
 				echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=404"/>';
 			}
-			include_once "View/Admin/addProduct.php";
 			break;
 		case 'editProduct':
 			if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 6) {
@@ -116,7 +125,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 											$admin = new admin();
 											$admin->editProductDatabase($_GET['maSP'], $productName, $category, $image, $price, $sale, $instock, $selled, $rate, $like, $descriptionShort, $descriptionLong);
 
-											$saveImage = new addImageProduct();
+											$saveImage = new addImage();
 											$saveImage->saveImageProduct($_FILES['image'], $productName);
 											echo "<script> alert('Cập nhật sản phẩm thành công') </script>";
 											echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=productList"/>';
@@ -138,8 +147,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 											include_once "View/Admin/editProduct.php";
 										}
 									}
-								} else {
-									include_once "View/Admin/productList.php";
 								}
 							}
 						}
@@ -161,6 +168,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 						$admin = new admin();
 						$admin->deleteCustomer($_POST['maKH']);
 						echo "<script> alert('Xóa tài khoản thành công') </script>";
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=adminList"/>';
+					}
+					if ($_GET['get'] == 'export') {
+						$export = new export();
+						$export->exportDataAdmins();
 						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=adminList"/>';
 					}
 				}
@@ -191,13 +203,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 								$fname = $_POST['fname'];
 								$lname = $_POST['lname'];
 								$role = $_POST['role'];
+								$password = $_POST['password'];
 
 								if ($emailBefore == $email) {
 									$validate = new validate();
 									$check = $validate->adminEditCustomer($fname, $lname, $email, $phone);
 									if ($check == 1) {
 										$admin = new admin();
-										$admin->updateCustomer($_GET['maKH'], $email, $phone, $fname, $lname, $role);
+										$admin->updateAdmin($_GET['maKH'], $email, $phone, $fname, $lname, $role, $password);
 										echo "<script> alert('Cập nhật tài khoản Quản trị thành công') </script>";
 										echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=adminList"/>';
 									} else {
@@ -211,7 +224,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 										$check = $validate->adminEditCustomer($fname, $lname, $email, $phone);
 										if ($check == 1) {
 											$admin = new admin();
-											$admin->updateCustomer($_GET['maKH'], $email, $phone, $fname, $lname, $rolee);
+											$admin->updateAdmin($_GET['maKH'], $email, $phone, $fname, $lname, $rolee, $password);
 											echo "<script> alert('Cập nhật tài khoản Quản trị thành công') </script>";
 											echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=adminList"/>';
 										} else {
@@ -238,10 +251,23 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 		case 'customerList':
 			if (isset($_GET['get'])) {
 				if ($_GET['get'] == 'deleteCustomer') {
-					$admin = new admin();
-					$admin->deleteCustomer($_POST['maKH']);
-					echo "<script> alert('Xóa tài khoản thành công') </script>";
-					echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=customerList"/>';
+					if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 6) {
+						$admin = new admin();
+						$admin->deleteCustomer($_POST['maKH']);
+						echo "<script> alert('Xóa tài khoản thành công') </script>";
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=customerList"/>';
+					} else {
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=404"/>';
+					}
+				}
+				if ($_GET['get'] == 'export') {
+					if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3) {
+						$export = new export();
+						$export->exportDataCustomers();
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=customerList"/>';
+					} else {
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=404"/>';
+					}
 				}
 			}
 			include_once "View/Admin/customerList.php";
@@ -371,9 +397,21 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 			include_once "View/Admin/categories.php";
 			break;
 		case 'invoiceList':
-			if (isset($_GET['get']) && $_GET['get'] == 'deleteInvoice') {
-				$admin = new admin();
-				$admin->deleteInvoice($_POST['maHD']);
+			if (isset($_GET['get'])) {
+				if ($_GET['get'] == 'deleteInvoice') {
+					$admin = new admin();
+					$admin->deleteInvoice($_POST['maHD']);
+					echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=invoiceList"/>';
+				}
+				if ($_GET['get'] == 'export') {
+					if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3) {
+						$export = new export();
+						$export->exportDataInfoInvoices();
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=invoiceList"/>';
+					} else {
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=404"/>';
+					}
+				}
 			}
 			include_once "View/Admin/invoiceList.php";
 			break;
@@ -434,6 +472,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 					echo "<script> alert('Xóa tin tức thành công') </script>";
 					echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=newsList"/>';
 				}
+				if ($_GET['get'] == 'export') {
+					$export = new export();
+					$export->exportDataNews();
+					echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=newsList"/>';
+				}
 			}
 			include_once "View/Admin/newsList.php";
 			break;
@@ -457,7 +500,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 						$admin = new admin();
 						$admin->addNews($title, $date, $imageName, $content, $tt);
 
-						$saveImage = new addImageProduct();
+						$saveImage = new addImage();
 						$saveImage->saveImageNews($_FILES['image'], $title);
 						die;
 						echo "<script> alert('Thêm tin tức thành công') </script>";
@@ -470,7 +513,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 			include_once "View/Admin/addNews.php";
 			break;
 		case 'editNews':
-			if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3) {
+			if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 6) {
 				if (isset($_GET['maTT']) && intval($_GET['maTT']) != null) {
 					$validate = new validate();
 					$check = $validate->checkExistsNews($_GET['maTT']);
@@ -508,7 +551,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 										$admin = new admin();
 										$admin->editNews($_GET['maTT'], $title, $date, $saveImageName, $content, $tt, $detail);
 
-										$saveImage = new addImageProduct();
+										$saveImage = new addImage();
 										$saveImage->saveImageNews($_FILES['image'], $code);
 										// echo "<script> alert('Cập nhật tin tức thành công') </script>";
 										echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=newsList"/>';
@@ -756,6 +799,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] != 0) {
 							echo "<script> alert('Đã xãy ra lỗi khi xóa') </script>";
 							echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=contactList"/>';
 						}
+					}
+					if ($_GET['get'] == 'export') {
+						$export = new export();
+						$export->exportDataContacts();
+						echo '<meta http-equiv="refresh" content="0; url=./index.php?action=admin-page&act=contactList"/>';
 					}
 				}
 				include_once "View/Admin/contactList.php";

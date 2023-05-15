@@ -101,7 +101,7 @@
 																																							} else {
 																																								echo $descriptionShort;
 																																							} ?></textarea>
-			<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "edit") echo $_SESSION['descriptionErrorAdminEditProduct']; ?></span>
+			<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "edit") echo $_SESSION['descriptionShortErrorAdminEditProduct']; ?></span>
 		</div>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 form-group">
@@ -111,7 +111,7 @@
 																																						} else {
 																																							echo $descriptionLong;
 																																						} ?></textarea>
-			<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "edit") echo $_SESSION['descriptionErrorAdminEditProduct']; ?></span>
+			<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "edit") echo $_SESSION['descriptionLongErrorAdminEditProduct']; ?></span>
 		</div>
 	</div>
 

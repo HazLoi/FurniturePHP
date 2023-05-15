@@ -8,7 +8,7 @@ class comment
 		$this->db = new connect();
 	}
 
-	public function insertComments($productId, $fname, $lname, $email, $content, $rating)
+	public function insertComments($productId, $idCustomer, $fname, $lname, $email, $content, $rating)
 	{
 		$fullname = $lname . " " . $fname;
 		$date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
@@ -21,8 +21,8 @@ class comment
 		}
 
 
-		$insert = "INSERT INTO binh_luan (maSP, tacgia, email, binhluan, ngay, danhgia)
-		VALUES ($productId, '$fullname', '$email', '$content', '$dateFix', $rating)";
+		$insert = "INSERT INTO binh_luan (maSP, maTG, tacgia, email, binhluan, ngay, danhgia)
+		VALUES ($productId, $idCustomer, '$fullname', '$email', '$content', '$dateFix', $rating)";
 
 		$this->db->exec($insert);
 	}
@@ -37,7 +37,7 @@ class comment
 
 	public function getCommentByProductIdOnePage($productId, $start, $limit)
 	{
-		$select = "SELECT * FROM binh_luan WHERE maSP = $productId and trangthai = 1 ORDER BY maBL DESC limit $start, $limit";
+		$select = "SELECT binh_luan.*, anh FROM binh_luan, nguoi_dung WHERE maTG = maKH and maSP = $productId and binh_luan.trangthai = 1 ORDER BY maBL DESC limit $start, $limit";
 
 		$result = $this->db->getList($select);
 		return $result;

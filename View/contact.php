@@ -57,7 +57,7 @@
     									</div>
 
     									<div class="form-group col-lg-12 col-md-12 col-sm-12">
-    										<textarea name="message" placeholder="Nội dung" value="<?php if (isset($_GET['act']) && $_GET['act'] == "send") echo $_POST['message'] ?>"></textarea>
+    										<textarea name="message"  id="contactMessage" placeholder="Nội dung" value="<?php if (isset($_GET['act']) && $_GET['act'] == "send") echo $_POST['message'] ?>"></textarea>
     										<span class="error text-danger"><?php if (isset($_GET['act']) && $_GET['act'] == "send") echo $_SESSION['messageErrorContact']; ?></span>
     									</div>
 
@@ -83,7 +83,7 @@
     									</div>
 
     									<div class="form-group col-lg-12 col-md-12 col-sm-12">
-    										<textarea name="message" placeholder="Nội dung" value="<?php if (isset($_GET['act']) && $_GET['act'] == "send") echo $_POST['message'] ?>"></textarea>
+    										<textarea name="message" id="contactMessage" placeholder="Nội dung" value="<?php if (isset($_GET['act']) && $_GET['act'] == "send") echo $_POST['message'] ?>"></textarea>
     										<span class="error text-danger"><?php if (isset($_GET['act']) && $_GET['act'] == "send") echo $_SESSION['messageErrorContact']; ?></span>
     									</div>
 

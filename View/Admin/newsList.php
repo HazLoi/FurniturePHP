@@ -10,7 +10,8 @@ if (isset($_GET['tt']) && $_GET['tt'] == 'all') {
 }
 ?>
 <div class="container-fluid">
-
+	<a class="btn btn-success" href="index.php?action=admin-page&act=newsList&get=export">Xuất dữ liệu ra file excel</a>
+	<hr class="sidebar-divider d-none d-md-block">
 	<div class="">
 		<a href="index.php?action=admin-page&act=newsList&get=tt&tt=all" class="btn btn-info text-white">Tất cả</a>
 		<a href="index.php?action=admin-page&act=newsList&get=tt&tt=1" class="btn btn-info text-white">Tin tức hiện</a>

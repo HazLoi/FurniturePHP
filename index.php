@@ -23,6 +23,7 @@ include_once "Controller/a-dhModel.php";
 		<!-- Responsive -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<script src="https://cdn.tiny.cloud/1/w14jmso7use3srii5jgm9yccylyxyglthet7nrd7z9o6gedh/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	</head>
 
 	<body>
@@ -53,7 +54,17 @@ include_once "Controller/a-dhModel.php";
 		<script src="assets/js/scrollbar.js"></script>
 		<script src="assets/js/mixitup.js"></script>
 		<script src="assets/js/script.js"></script>
-
+		<script>
+			tinymce.init({
+				selector: '#contactMessage', // Chỉ định ID của phần tử textarea
+				plugins: 'link lists', // Chỉ cần sử dụng các plugin cần thiết
+				toolbar: 'undo redo | bold italic underline | bullist numlist | link', // Chỉ định các công cụ cần thiết
+				// menubar: false, // Tắt thanh menu
+				// statusbar: false, // Tắt thanh trạng thái
+				width: '100%', // Đặt chiều rộng cho trình soạn thảo
+				height: 300 // Đặt chiều cao cho trình soạn thảo
+			});
+		</script>
 	</body>
 
 	</html>
@@ -75,7 +86,7 @@ if (isset($_GET['action']) && $_GET['action'] === "admin-page" && $_SESSION['idC
 
 		<!-- Custom fonts for this template-->
 
-		<!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+		<!-- <link href="assets/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
 		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- Custom styles for this template-->
@@ -110,19 +121,19 @@ if (isset($_GET['action']) && $_GET['action'] === "admin-page" && $_SESSION['idC
 			</div>
 		</div>
 
-
+		<script src="assets/js/test.js"></script>
 		<!-- Bootstrap core JavaScript-->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/Admin/vendor/jquery/jquery.min.js"></script>
+		<script src="assets/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 		<!-- Core plugin JavaScript-->
-		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+		<script src="assets/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 		<!-- Custom scripts for all pages-->
 		<script src="assets/Admin/js/sb-admin-2.min.js"></script>
 
 		<!-- Page level plugins -->
-		<script src="vendor/chart.js/Chart.min.js"></script>
+		<script src="assets/Admin/vendor/chart.js/Chart.min.js"></script>
 
 		<!-- Page level custom scripts -->
 		<script src="assets/Admin/js/demo/chart-area-demo.js"></script>

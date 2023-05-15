@@ -1,4 +1,8 @@
 <div class="container-fluid">
+	<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3) { ?>
+	<a class="btn btn-success" href="index.php?action=admin-page&act=customerList&get=export">Xuất dữ liệu ra file excel</a>
+	<?php } ?>
+	<hr class="sidebar-divider d-none d-md-block">
 	<div class="row mt-3">
 		<table class="table table-borderless">
 			<thead>

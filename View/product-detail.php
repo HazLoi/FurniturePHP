@@ -207,7 +207,7 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                                         <div class="comment-box">
                                             <div class="comment">
                                                 <div class="author-thumb">
-                                                    <!-- <img src="assets/images/resource/author-1.jpg" alt=""> -->
+                                                    <img src="assets/images/imageAccount/<?= ($get['anh'] != '') ? $get['anh'] : 'user.png' ?>" alt="">
                                                 </div>
                                                 <div class="comment-inner">
                                                     <div class="comment-info clearfix">
@@ -290,7 +290,8 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
                                     </div>
                                 <?php } else {  ?>
-                                    <div class="shop-comment-form">
+                                    <p class="h4">Vui lòng đăng nhập để bình luận sản phẩm</p>
+                                    <!-- <div class="shop-comment-form">
                                         <h2>Thêm bình luận của bạn</h2>
                                         <form method="post" action="index.php?action=product-detail&maSP=<?php $maSP ?>&get=comment">
                                             <div class="rating-box">
@@ -329,7 +330,7 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                                             </div>
                                         </form>
 
-                                    </div>
+                                    </div> -->
                                 <?php } ?>
                             </div>
                         </div>

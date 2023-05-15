@@ -17,7 +17,7 @@
 					<tr>
 						<td><?php echo $get['maLoai'] ?></td>
 						<td><?php echo $get['tenloai'] ?></td>
-						<td style="font-size: 18px">
+						<td class="d-flex" style="font-size: 18px">
 							<a class="btn btn-primary" href="index.php?action=admin-page&act=findCategoryDeleted&get=submit&id=<?= $get['maLoai'] ?>">Kích hoạt lại</a>
 							<a class="btn btn-danger" href="index.php?action=admin-page&act=findCategoryDeleted&get=delete&id=<?= $get['maLoai'] ?>">Tạm biệt</a>
 						</td>

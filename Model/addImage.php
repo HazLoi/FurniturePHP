@@ -1,6 +1,6 @@
 <?php
 
-class addImageProduct
+class addImage
 {
 	public function saveImageProduct($image, $tensp)
 	{
@@ -89,6 +89,40 @@ class addImageProduct
 		// Move the image to the folder if it is valid
 		if ($validImage) {
 			$imageDestination = 'assets/images/resource/' . $saveImageMain;
+			move_uploaded_file($imageTempName, $imageDestination);
+		}
+
+
+		return $validImage;
+	}
+
+	public function addImageAccount($image, $newsName)
+	{
+		$imageName = $image['name'];
+		$imageType = $image['type'];
+		$imageTempName = $image['tmp_name'];
+		$imageError = $image['error'];
+		$imageSize = $image['size'];
+
+		// Validate the image
+		$validImage = true;
+		if ($imageError !== 0) {
+			$validImage = false;
+		}
+		//kiểm tra kích thước ảnh
+		if ($imageSize > 500000) {
+			$validImage = false;
+		}
+		//kiểm tra đuôi ảnh
+		$imageExtension = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+		$allowedExtensions = ['jpeg', 'jpg', 'png'];
+		if (!in_array($imageExtension, $allowedExtensions)) {
+			$validImage = false;
+		}
+
+		// Move the image to the folder if it is valid
+		if ($validImage) {
+			$imageDestination = 'assets/images/imageAccount/' . $newsName;
 			move_uploaded_file($imageTempName, $imageDestination);
 		}
 

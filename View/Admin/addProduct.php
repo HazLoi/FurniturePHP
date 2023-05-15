@@ -28,13 +28,13 @@
 
 			<div class="form-group">
 				<label for="price">Đơn giá</label>
-				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['price'] ?>" type="number" value="0" name="price">
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") {echo $_POST['price'];}else{echo '0';} ?>" type="number" name="price">
 				<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['priceErrorAdminAddProduct']; ?></span>
 			</div>
 
 			<div class="form-group">
 				<label for="sale">Giảm giá</label>
-				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['sale'] ?>" type="number" value="0" name="sale">
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") {echo $_POST['sale'];}else{echo '0';} ?>" type="number" name="sale">
 				<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['saleErrorAdminAddProduct']; ?></span>
 			</div>
 		</div>
@@ -42,37 +42,37 @@
 			<button class="btn btn-primary">Thêm sản phẩm</button>
 			<div class="form-group">
 				<label for="instock">Tồn kho</label>
-				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['instock'] ?>" type="number" value="0" name="instock">
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") {echo $_POST['instock'];}else{echo '0';} ?>" type="number" name="instock">
 				<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['instockErrorAdminAddProduct']; ?></span>
 			</div>
 
 			<div class="form-group">
 				<label for="selled">Đã bán</label>
-				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['selled'] ?>" type="number" value="0" name="selled">
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") {echo $_POST['selled'];}else{echo '0';} ?>" type="number" name="selled">
 				<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['selledErrorAdminAddProduct']; ?></span>
 			</div>
 
 			<div class="form-group">
 				<label for="rate">Đánh giá</label>
-				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['rate'] ?>" type="number" value="0" name="rate">
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") {echo $_POST['rate'];}else{echo '0';} ?>" type="number" name="rate">
 				<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['rateErrorAdminAddProduct']; ?></span>
 			</div>
 
 			<div class="form-group">
 				<label for="like">Yêu thích</label>
-				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['like'] ?>" type="number" value="0" name="like">
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "add") {echo $_POST['like'];}else{echo '0';} ?>" type="number" name="like">
 				<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['likeErrorAdminAddProduct']; ?></span>
 			</div>
 		</div>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 form-group">
-			<label for="descriptionShort">Mô tả</label>
+			<label for="descriptionShort">Mô tả ngắn</label>
 			<textarea class="form-control" style="resize: none; height: 700px" type="text" name="descriptionShort" id="description"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['descriptionShort'] ?></textarea>
 			<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['descriptionShortErrorAdminAddProduct']; ?></span>
 		</div>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 form-group">
-			<label for="descriptionLong">Mô tả</label>
+			<label for="descriptionLong">Mô tả chi tiết</label>
 			<textarea class="form-control" style="resize: none; height: 700px" type="text" name="descriptionLong" id="description"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_POST['descriptionLong'] ?></textarea>
 			<span class="text-danger"><?php if (isset($_GET['get']) && $_GET['get'] == "add") echo $_SESSION['descriptionLongErrorAdminAddProduct']; ?></span>
 		</div>

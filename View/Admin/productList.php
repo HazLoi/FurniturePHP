@@ -16,13 +16,18 @@ if (isset($_GET['category']) && $_GET['category'] == 'all') {
 }
 ?>
 <div class="container-fluid">
+	<a id="exportData" class="btn btn-success" href="index.php?action=admin-page&act=productList&get=export">Xuất dữ liệu ra file excel</a>
+
+	<hr class="sidebar-divider d-none d-md-block">
 	<div class="d-flex">
 		<button class="btn btn-primary" id="searchName">Tìm theo tên</button>
 		<button class="btn btn-primary mx-1" id="searchId">Tìm theo mã</button>
-		<form class="m-auto" action="index.php?action=admin-page&act=importProducts" method="post" enctype="multipart/form-data">
-			<input class="" type="file" name="fileImport">
-			<button class="btn btn-primary">Chèn dữ liệu</button>
-		</form>
+		<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 4) { ?>
+			<form class="m-auto" action="index.php?action=admin-page&act=importProducts" method="post" enctype="multipart/form-data">
+				<input class="" type="file" name="fileImport">
+				<button class="btn btn-primary">Chèn dữ liệu</button>
+			</form>
+		<?php } ?>
 	</div>
 
 	<form class="d-none form-inline navbar-search my-2" id="f1" action="index.php?action=admin-page&act=productList&get=searchByName" method="post">

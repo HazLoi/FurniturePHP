@@ -13,6 +13,7 @@ if (isset($_GET['act']) && $_GET['act'] == 'login') {
 		$_SESSION['lname'] = $result['ten'];
 		$_SESSION['fname'] = $result['ho'];
 		$_SESSION['phone'] = $result['sdt'];
+		$_SESSION['image'] = $result['anh'];
 
 		echo '<meta http-equiv="refresh" content="0; url=./index.php?action=home"/>';
 	} else {

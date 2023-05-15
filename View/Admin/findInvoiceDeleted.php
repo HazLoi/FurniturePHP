@@ -33,7 +33,7 @@
 								<span class="btn btn-primary"><?php echo "Đã thanh toán" ?></span>
 							<?php } ?>
 						</td>
-						<td style="font-size: 18px">
+						<td class="d-flex" style="font-size: 18px">
 							<a class="btn btn-primary" href="index.php?action=admin-page&act=findInvoiceDeleted&get=submit&id=<?= $get['maHD'] ?>">Kích hoạt lại</a>
 							<a class="btn btn-danger" href="index.php?action=admin-page&act=findInvoiceDeleted&get=delete&id=<?= $get['maHD'] ?>">Tạm biệt</a>
 						</td>

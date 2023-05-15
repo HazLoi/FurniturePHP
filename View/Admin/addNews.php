@@ -36,7 +36,7 @@
 		</div>
 		<div class="col-lg-9 col-md-9 col-sm-12">
 			<div class="form-group">
-				<label for="content">Nội dung</label>
+				<label for="content">Mô tả ngắn</label>
 				<textarea class="form-control" cols="10" rows="13" style="resize: none;" type="text" name="content"><?php if (isset($_GET['get']) && $_GET['get'] == "add") {
 																																							echo $_POST['content'];
 																																						} ?></textarea>

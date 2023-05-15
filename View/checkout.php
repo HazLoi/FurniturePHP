@@ -150,7 +150,7 @@
 
                                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                             <div class="field-label">Ghi chú đặt hàng</div>
-                                            <textarea name="note" placeholder="Lưu ý về đơn đặt hàng của bạn. ví dụ. lưu ý đặc biệt cho giao hàng"></textarea>
+                                            <textarea id="contactMessage" name="note" placeholder="Lưu ý về đơn đặt hàng của bạn. ví dụ. lưu ý đặc biệt cho giao hàng"></textarea>
                                         </div>
 
                                     </div>

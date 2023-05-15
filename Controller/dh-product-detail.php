@@ -47,7 +47,7 @@ if (isset($_GET['maSP'])) {
 				$check = $validate->checkComment($fname, $lname, $email, $content, $rating);
 				if ($check == 1) {
 					$comment = new comment();
-					$result = $comment->insertComments($productId, $fname, $lname, $email, $content, $rating);
+					$result = $comment->insertComments($productId, $_SESSION['idCustomer'], $fname, $lname, $email, $content, $rating);
 					echo '<meta http-equiv="refresh" content="0; url=./index.php?action=product-detail&maSP=' . $productId . '"/>';
 				} else {
 					include_once "View/product-detail.php";

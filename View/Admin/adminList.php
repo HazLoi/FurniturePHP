@@ -1,10 +1,12 @@
 <div class="container-fluid">
 	<?php if ($_SESSION['role'] == 1) { ?>
-		<form class="m-auto" action="index.php?action=admin-page&act=importAdmin" method="post" enctype="multipart/form-data">
-			<input class="" type="file" name="fileImport">
-			<button class="btn btn-primary">Thêm tài khoản</button>
-		</form>
+	<a class="btn btn-success" href="index.php?action=admin-page&act=adminList&get=export">Xuất dữ liệu ra file excel</a>
 	<?php } ?>
+	<hr class="sidebar-divider d-none d-md-block">
+	<form class="m-auto" action="index.php?action=admin-page&act=importAdmin" method="post" enctype="multipart/form-data">
+		<input class="" type="file" name="fileImport">
+		<button class="btn btn-primary">Thêm tài khoản</button>
+	</form>
 	<div class="row mt-3">
 		<table class="table table-borderless">
 			<thead>

@@ -45,6 +45,16 @@
 			</div>
 
 			<div class="form-group">
+				<label for="password">Mật khẩu</label>
+				<input class="form-control" value="<?php if (isset($_GET['get']) && $_GET['get'] == "edit") {
+																	echo $_POST['password'];
+																} ?>" type="password" value="0" name="password" id="passwordEdit">
+				<button class="border-0" style="background: none;" type="button" onclick="showPassEdit()">
+					<span id="showPassEdit">Hiện mật khẩu</span>
+				</button>
+			</div>
+
+			<div class="form-group">
 				<label for="role">Phân quyền</label>
 				<select class="form-control" name="role">
 					<option value="<?php echo $roleId ?>">

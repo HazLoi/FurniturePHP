@@ -15,8 +15,25 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-4 col-sm-12 border-right my-5">
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-				<h3 class="m-auto"><?php echo $fullname ?></h3>
-				
+
+				<form action="index.php?action=myAccount&get=updateImageAccount" method="post" class="mb-2" enctype="multipart/form-data">
+					<div class="d-flex mb-2 justify-content-center">
+						<div class="position-relative">
+							<input id="image-upload" name="imageAccount" class="d-none" type="file" onchange="previewImage(event)">
+							<img src="assets/images/imageAccount/<?= $_SESSION['image'] != '' ? $_SESSION['image'] : 'user.png' ?>" id="preview" style="width: 60px; height: 60px; border-radius: 50px; background: rgb(206, 196, 196)">
+							<div class="position-absolute" style="right: 0; top: 45px">
+								<label for="image-upload" style="display: inline-block"><i class="fa fa-camera" style="font-size: 18px"></i></label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<button class="btn btn-success col-lg-6 col-md-6 col-sm-6" id="btnUpdateImageAccount" style="display: none">Xác nhận</button>
+						<button type="button" onclick="exitBtn()" class="btn btn-light col-lg-6 col-md-6 col-sm-6" id="btnExitUpdateImageAccount" style="display: none">Hủy</button>
+					</div>
+				</form>
+
+				<h3 class="m-auto"><?php echo	 $fullname ?></h3>
+
 				<?php if ($_SESSION['role'] == 1) { ?>
 					<div>
 						<input class="form-control" type="text" name="phone" value="0987813589 (totoday.vn)" disabled>
@@ -139,7 +156,7 @@
 					</form>
 				</div>
 				<div class="tab-pane fade" id="v-pills-invoices" role="tabpanel" aria-labelledby="v-pills-invoices-tab">
-					<div class="row">
+					<div class="row" style="overflow-y: auto; height: 500px">
 						<table class="table table-striped" style="font-size: 18px">
 							<tr>
 								<td>Mã hóa đơn</td>
@@ -168,7 +185,7 @@
 						</table>
 					</div>
 				</div>
-				<div class="tab-pane fade <?php if (!empty($_GET['get']) && $_GET['get'] == 'wishlist') echo 'show active' ?>" id="v-pills-wishlist" role="tabpanel" aria-labelledby="v-pills-wishlist-tab">
+				<div class="tab-pane fade <?php if (!empty($_GET['get']) && $_GET['get'] == 'wishlist') echo 'show active' ?>" id="v-pills-wishlist" role="tabpanel" aria-labelledby="v-pills-wishlist-tab" style="overflow-y: auto; height: 600px">
 					<table class="table table-striped" style="font-size: 18px">
 						<tr>
 							<td>Tên sản phẩm</td>
@@ -217,5 +234,4 @@
 			this.classList.add("text-success", 'border-success');
 		});
 	});
-
 </script>

@@ -13,7 +13,10 @@ if (isset($_GET['get'])) {
 }
 ?>
 <div class="container-fluid">
-
+	<?php if ($_SESSION['role'] == 1) { ?>
+	<a class="btn btn-success" href="index.php?action=admin-page&act=contactList&get=export">Xuất dữ liệu ra file excel</a>
+	<?php } ?>
+	<hr class="sidebar-divider d-none d-md-block">
 	<form class="form-inline navbar-search my-2" id="f1" action="index.php?action=admin-page&act=contactList&get=searchBySubject" method="post">
 		<div class="input-group">
 			<input name="search" type="text" class="form-control bg-light border-1 small" placeholder="Tìm kiếm tên chủ đề" aria-label="Search" aria-describedby="basic-addon2">

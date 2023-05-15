@@ -1,4 +1,8 @@
 <div class="container-fluid">
+	<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3) { ?>
+	<a class="btn btn-success" href="index.php?action=admin-page&act=invoiceList&get=export">Xuất dữ liệu ra file excel</a>
+	<?php } ?>
+	<hr class="sidebar-divider d-none d-md-block">
 	<div class="row mt-3">
 		<table class="table table-borderless">
 			<thead>
@@ -34,11 +38,11 @@
 							<?php } ?>
 						</td>
 						<td style="font-size: 18px">
-						<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 5) { ?>
-							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalOrder<?php echo $get['maHD'] ?>"><i class="fa-solid fa-trash-can"></i></button>
+							<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 5) { ?>
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalOrder<?php echo $get['maHD'] ?>"><i class="fa-solid fa-trash-can"></i></button>
 							<?php } ?>
 							<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 6) { ?>
-							<a href="index.php?action=admin-page&act=editInvoice&id=<?php echo $get['maHD'] ?>" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+								<a href="index.php?action=admin-page&act=editInvoice&id=<?php echo $get['maHD'] ?>" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
 							<?php } ?>
 						</td>
 					</tr>

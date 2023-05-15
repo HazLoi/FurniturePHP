@@ -29,7 +29,8 @@ if (isset($_SESSION['productCart']) && count($_SESSION['productCart']) > 0) {
 					$total += $item['thanhtien'];
 				}
 	
-				$checkout->saveInvoiceInfomation($idInvoice, $_SESSION['idCustomer'], $_SESSION['fullname'], $phone, $email, $companyName, $address1, $address2, $city, $zip, $total, $note);
+				$a = $checkout->saveInvoiceInfomation($idInvoice, $_SESSION['idCustomer'], $_SESSION['fullname'], $phone, $email, $companyName, $address1, $address2, $city, $code, $total, $note);
+
 				$checkout->updateInvoiceTotal($idInvoice, $total);
 				$send = new sendEmail();
 				$send->sendEmailCheckout($_SESSION['idCustomer'], $idInvoice, $email);

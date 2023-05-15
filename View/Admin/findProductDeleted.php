@@ -44,7 +44,7 @@
 							echo $qtyCommentByProductId['soluong']
 							?>
 						</td>
-						<td style="font-size: 18px">
+						<td class="d-flex" style="font-size: 18px">
 							<a class="btn btn-primary" href="index.php?action=admin-page&act=findProductDeleted&get=submit&id=<?= $get['maSP'] ?>">Kích hoạt lại</a>
 							<a class="btn btn-danger" href="index.php?action=admin-page&act=findProductDeleted&get=delete&id=<?= $get['maSP'] ?>">Tạm biệt</a>
 						</td>

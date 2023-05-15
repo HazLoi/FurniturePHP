@@ -170,4 +170,15 @@ class user
 		$result = $this->db->exec($insert);
 		return $result;
 	}
+
+	public function updateImageAccount($idCustomer, $imageName)
+	{
+		$date = new DateTime('now');
+		$dateFix = $date->format('Y-m-d');
+
+		$update = "UPDATE nguoi_dung SET anh = '$imageName', ngaycapnhat = '$dateFix' WHERE maKH = '$idCustomer'";
+		
+		$result = $this->db->exec($update);
+		return $result;
+	}
 }

@@ -475,7 +475,6 @@ class validate
 		$_SESSION['selledErrorAdminEditProduct'] = "";
 		$_SESSION['rateErrorAdminEditProduct'] = "";
 		$_SESSION['likeErrorAdminEditProduct'] = "";
-		$_SESSION['descriptionShortErrorAdminEditProduct'] = "";
 		$_SESSION['descriptionLongErrorAdminEditProduct'] = "";
 
 		if (empty($productName)) {

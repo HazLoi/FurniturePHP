@@ -40,11 +40,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Yêu cầu:</h6>
                 <a class="collapse-item" href="index.php?action=admin-page&act=productList">Xem sản phẩm</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 4) {
-                                                                                    echo "addProduct";
-                                                                                } else {
-                                                                                    echo '404';
-                                                                                } ?>">Thêm sản phẩm</a>
+                <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 4) { ?>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=addProduct">Thêm sản phẩm</a>
+                <?php } ?>
                 <a class="collapse-item" href="index.php?action=admin-page&act=categories">Loại sản phẩm</a>
             </div>
         </div>
@@ -62,19 +60,19 @@
                 </div>
             </div>
         </li>
-    <?php } ?>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-            <i class="text-light fa-solid fa-id-card"></i>
-            <span>Khách hàng</span>
-        </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Yêu cầu:</h6>
-                <a class="collapse-item" href="index.php?action=admin-page&act=customerList">Xem danh sách</a>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                <i class="text-light fa-solid fa-id-card"></i>
+                <span>Khách hàng</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Yêu cầu:</h6>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=customerList">Xem danh sách</a>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    <?php } ?>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
@@ -98,63 +96,61 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Yêu cầu:</h6>
                 <a class="collapse-item" href="index.php?action=admin-page&act=newsList">Xem danh sách</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=<?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 4) {
-                                                                                    echo "addNews";
-                                                                                } else {
-                                                                                    echo '404';
-                                                                                } ?>">Thêm tin tức</a>
+                <?php if ($_SESSION['role'] == 1 || $_SESSION['role'] == 3 || $_SESSION['role'] == 4) { ?>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=addNews">Thêm tin tức</a>
+                <?php } ?>
             </div>
         </div>
     </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-            <i class="text-light fa-solid fa-envelope"></i>
-            <span>Liên hệ</span>
-        </a>
-        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Yêu cầu:</h6>
-                <a class="collapse-item" href="index.php?action=admin-page&act=contactList">Xem danh sách</a>
+    <?php if ($_SESSION['role'] == 1) { ?>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                <i class="text-light fa-solid fa-envelope"></i>
+                <span>Liên hệ</span>
+            </a>
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Yêu cầu:</h6>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=contactList">Xem danh sách</a>
+                </div>
             </div>
-        </div>
-    </li>
-
+        </li>
+    <?php } ?>
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Bổ sung
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php?action=admin-page&act=thongke">
-            <i class="fa-solid fa-signal text-light"></i>
-            <span>Thống kê</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-            <i class="text-light fa-solid fa-file-invoice-dollar"></i>
-            <span>Danh mục bị xóa</span>
-        </a>
-        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Yêu cầu:</h6>
-                <a class="collapse-item" href="index.php?action=admin-page&act=findAdminDeleted">Admin</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=findCustomerDeleted">Khách hàng</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=findProductDeleted">Sản phẩm</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=findCategoryDeleted">Loại sản phẩm</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=findInvoiceDeleted">Hóa đơn</a>
-                <a class="collapse-item" href="index.php?action=admin-page&act=findContactDeleted">Liên hệ</a>
-            </div>
+    <?php if ($_SESSION['role'] == 1) { ?>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Bổ sung
         </div>
-    </li>
 
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="index.php?action=admin-page&act=thongke">
+                <i class="fa-solid fa-signal text-light"></i>
+                <span>Thống kê</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                <i class="text-light fa-solid fa-file-invoice-dollar"></i>
+                <span>Danh mục bị xóa</span>
+            </a>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Yêu cầu:</h6>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=findAdminDeleted">Admin</a>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=findCustomerDeleted">Khách hàng</a>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=findProductDeleted">Sản phẩm</a>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=findCategoryDeleted">Loại sản phẩm</a>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=findInvoiceDeleted">Hóa đơn</a>
+                    <a class="collapse-item" href="index.php?action=admin-page&act=findContactDeleted">Liên hệ</a>
+                </div>
+            </div>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">
+    <?php } ?>
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

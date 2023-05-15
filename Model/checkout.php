@@ -46,9 +46,10 @@ class checkout
 		$date = new DateTime('now');
 		$dateFix = $date->format('Y-m-d');
 
-		$insert = "INSERT INTO thanh_toan (maHD, maKH, tenKH, sdt, email, congty, diachi1, diachi2, `tinh/thanhpho` , zip, ngay, tongtien, ghichu)
-		VALUES ('$idInvoice', '$idCustomer', '$fullname', '$phone', '$email', '$companyName', '$address1', '$address2, '$city' , '$zip', '$dateFix', $total, '$note')";
+		$insert = "INSERT INTO thanh_toan (maHD, maKH, tenKH, sdt, email, congty, diachi1, diachi2, thanhpho, zip, ngay, tongtien, ghichu)
+		VALUES ($idInvoice, $idCustomer, '$fullname', '$phone', '$email', '$companyName', '$address1', '$address2', '$city' , '$zip', '$dateFix', $total, '$note')";
 
-		$this->db->exec($insert);
+		$result =  $this->db->exec($insert);
+		return $result;
 	}
 }

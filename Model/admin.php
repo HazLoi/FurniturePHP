@@ -15,6 +15,13 @@ class admin
 		return $result;
 	}
 
+	public function getAllProductExport()
+	{
+		$select = "SELECT * FROM sanpham a, loai_sanpham b WHERE loai = maLoai";
+		$result = $this->db->getList($select);
+		return $result;
+	}
+
 	public function getProductForCategory($loai)
 	{
 		$select = "SELECT * FROM sanpham a, loai_sanpham b WHERE loai = maLoai and tenloai = '$loai' and a.trangthai = 1";
@@ -43,10 +50,15 @@ class admin
 
 	public function addProductDatabase($productName, $category, $image, $price, $sale, $instock, $selled, $rate, $like, $descriptionShort, $descriptionLong)
 	{
-		$insert = "INSERT INTO sanpham (maSP, ten, loai, anh, dongia, giamgia, motangan, mota, mausac, kichthuoc, tonkho, daban, danhgia, yeuthich)
-		VALUES (null , '$productName', '$category', '$image', $price, $sale, '$descriptionShort', '$descriptionLong', '', '','$instock', '$selled', '$rate', '$like')";
+		$date = new DateTime('now');
+		$dateFix = $date->format('Y-m-d');
 
-		$this->db->exec($insert);
+		$insert = "INSERT INTO sanpham (ten, loai, anh, dongia, giamgia, motangan, mota, tonkho, daban, danhgia, yeuthich, ngaythem)
+		VALUES ('$productName', '$category', '$image', $price, $sale, '$descriptionShort', '$descriptionLong', '$instock', '$selled', $rate, '$like', '$dateFix')";
+
+		$result = $this->db->exec($insert);
+
+		return $result;
 	}
 
 	public function editProductDatabase($productId, $productName, $category, $image, $price, $sale, $instock, $selled, $rate, $like, $descriptionShort, $descriptionLong)
@@ -56,7 +68,9 @@ class admin
 
 		$update = "UPDATE sanpham SET ten = '$productName', loai = '$category', anh = '$image', giamgia = $sale, dongia = $price, tonkho = '$instock', daban = '$selled', danhgia = '$rate', yeuthich = '$like', mota = '$descriptionLong', motangan = '$descriptionShort', ngaycapnhat = '$dateFix' WHERE maSP = $productId";
 
-		$this->db->exec($update);
+		$result = $this->db->exec($update);
+
+		return $result;
 	}
 
 	public function editProductDatabaseNoImage($productId, $productName, $category, $price, $sale, $instock, $selled, $rate, $like, $descriptionShort, $descriptionLong)
@@ -66,13 +80,15 @@ class admin
 
 		$update = "UPDATE sanpham SET ten = '$productName', loai = '$category', giamgia = $sale, dongia = $price, tonkho = '$instock', daban = '$selled', danhgia = '$rate', yeuthich = '$like', mota = '$descriptionLong', motangan = '$descriptionShort', ngaycapnhat = '$dateFix' WHERE maSP = $productId";
 
-		$this->db->exec($update);
+		$result = $this->db->exec($update);
+		return $result;
 	}
 
 	public function deleteProductDatabase($productId)
 	{
 		$query = "UPDATE sanpham SET trangthai = 0 WHERE maSP = $productId";
-		$this->db->exec($query);
+		$result = $this->db->exec($query);
+		return $result;
 	}
 
 	public function findProductById($productId)
@@ -83,7 +99,14 @@ class admin
 
 	public function getAllCustomer()
 	{
-		$select = "SELECT * FROM nguoi_dung as a, phan_quyen as b WHERE a.maQuyen = 0 and a.maQuyen = b.maQuyen and a.trangthai = 1";
+		$select = "SELECT a.*, quyen FROM nguoi_dung as a, phan_quyen as b WHERE a.maQuyen = 0 and a.maQuyen = b.maQuyen and a.trangthai = 1";
+		$result = $this->db->getList($select);
+		return $result;
+	}
+
+	public function getAllCustomerExport()
+	{
+		$select = "SELECT a.*, quyen FROM nguoi_dung as a, phan_quyen as b WHERE a.maQuyen = 0 and a.maQuyen = b.maQuyen";
 		$result = $this->db->getList($select);
 		return $result;
 	}
@@ -97,14 +120,16 @@ class admin
 	public function deleteCustomer($idCustomer)
 	{
 		$delete = "UPDATE nguoi_dung SET trangthai = 0 WHERE maKH = $idCustomer";
-		$this->db->exec($delete);
+		$result = $this->db->exec($delete);
+		return $result;
 	}
 
 	public function updateCustomer($idCustomer, $email, $phone, $fname, $lname, $role)
 	{
 		$fullname = $lname . " " . $fname;
 		$update = "UPDATE nguoi_dung SET ho = '$fname', ten='$lname', hovaten = '$fullname', sdt = '$phone', email = '$email', maQuyen = $role WHERE maKH = $idCustomer";
-		$this->db->exec($update);
+		$result = $this->db->exec($update);
+		return $result;
 	}
 
 	public function getAllRole()
@@ -124,12 +149,45 @@ class admin
 
 	public function getAllAdmin()
 	{
-		$select = "SELECT * FROM nguoi_dung as a, phan_quyen as b WHERE a.maQuyen != 0 and a.maQuyen = b.maQuyen and a.trangthai = 1";
+		$select = "SELECT a.*, quyen FROM nguoi_dung as a, phan_quyen as b WHERE a.maQuyen != 0 and a.maQuyen = b.maQuyen and a.trangthai = 1";
 		$result = $this->db->getList($select);
 		return $result;
 	}
 
+	public function getAllAdminExport()
+	{
+		$select = "SELECT a.*, quyen FROM nguoi_dung as a, phan_quyen as b WHERE a.maQuyen != 0 and a.maQuyen = b.maQuyen";
+		$result = $this->db->getList($select);
+		return $result;
+	}
+
+	public function updateAdmin($idCustomer, $email, $phone, $fname, $lname, $role, $password)
+	{
+		if (!empty($password) && $password != '') {
+			$mahoa1 = "!%HazKing@";
+			$mahoa2 = "!^HazHonTu*";
+			$mk = md5($mahoa1 . $password . $mahoa2);
+
+			$fullname = $lname . " " . $fname;
+			$update = "UPDATE nguoi_dung SET ho = '$fname', ten='$lname', hovaten = '$fullname', sdt = '$phone', email = '$email', maQuyen = $role, matkhau = '$mk' WHERE maKH = $idCustomer";
+			$result = $this->db->exec($update);
+			return $result;
+		} else {
+			$fullname = $lname . " " . $fname;
+			$update = "UPDATE nguoi_dung SET ho = '$fname', ten='$lname', hovaten = '$fullname', sdt = '$phone', email = '$email', maQuyen = $role WHERE maKH = $idCustomer";
+			$result = $this->db->exec($update);
+			return $result;
+		}
+	}
+
 	public function getAllNews()
+	{
+		$select = "SELECT * FROM tin_tuc";
+		$result = $this->db->getList($select);
+		return $result;
+	}
+
+	public function getAllNewsExport()
 	{
 		$select = "SELECT * FROM tin_tuc";
 		$result = $this->db->getList($select);
@@ -157,7 +215,8 @@ class admin
 
 		$update = "UPDATE tin_tuc SET tenTT = '$title',anh = '$imageName', ngay = '$date', noidung = '$content', tinhtrang = $tt, chitiet = '$detail', ngaycapnhat = '$dateFix' WHERE maTT = $newsId";
 
-		$this->db->exec($update);
+		$result = $this->db->exec($update);
+		return $result;
 	}
 
 	public function editNewsNoImage($newsId, $title, $date, $content, $tt, $detail)
@@ -167,7 +226,8 @@ class admin
 
 		$update = "UPDATE tin_tuc SET tentT = '$title', ngay = '$date', noidung = '$content', tinhtrang = $tt, chitiet = '$detail', ngaycapnhat = '$dateFix' WHERE maTT = $newsId";
 
-		$this->db->exec($update);
+		$result = $this->db->exec($update);
+		return $result;
 	}
 
 	public function addNews($title, $date, $image, $content, $tt)
@@ -176,13 +236,15 @@ class admin
 
 		VALUES ('$title', '$image', '$date', '$content','$tt')";
 
-		$this->db->exec($insert);
+		$result = $this->db->exec($insert);
+		return $result;
 	}
 
 	public function deleteNews($newsId)
 	{
 		$delete = "UPDATE tin_tuc SET trangthai = 0 WHERE maTT = $newsId";
-		$this->db->exec($delete);
+		$result = $this->db->exec($delete);
+		return $result;
 	}
 
 	public function getAllInvoice()
@@ -192,10 +254,25 @@ class admin
 		return $result;
 	}
 
+	public function getAllInfoInvoices()
+	{
+		$select = "SELECT b.*, a.tinhtrang, a.trangthai, a.ngaycapnhat FROM hoa_don as a, thanh_toan as b WHERE a.maHD = b.maHD and a.trangthai = 1";
+		$result = $this->db->getList($select);
+		return $result;
+	}
+
+	public function getAllInfoInvoicesExport()
+	{
+		$select = "SELECT b.*, a.tinhtrang, a.trangthai, a.ngaycapnhat FROM hoa_don as a, thanh_toan as b WHERE a.maHD = b.maHD";
+		$result = $this->db->getList($select);
+		return $result;
+	}
+
 	public function deleteInvoice($invoiceId)
 	{
 		$delete = "UPDATE hoa_don SET trangthai = 0 WHERE maHD = $invoiceId";
-		$this->db->exec($delete);
+		$result = $this->db->exec($delete);
+		return $result;
 	}
 
 	public function editInvoice($invoiceId, $productId, $quantity, $price)
@@ -353,6 +430,15 @@ class admin
 	public function getAllContact()
 	{
 		$select = "SELECT * FROM lienhe WHERE trangthai = 1";
+
+		$result = $this->db->getList($select);
+
+		return $result;
+	}
+
+	public function getAllContactExport()
+	{
+		$select = "SELECT * FROM lienhe";
 
 		$result = $this->db->getList($select);
 

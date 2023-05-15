@@ -23,7 +23,7 @@
 						<td><?php echo $get['email'] ?></td>
 						<td><?php echo $get['chude'] ?></td>
 						<td><?php echo $get['noidung'] ?></td>
-						<td style="font-size: 18px">
+						<td class="d-flex" style="font-size: 18px">
 							<a class="btn btn-primary" href="index.php?action=admin-page&act=findContactDeleted&get=submit&id=<?= $get['maLH'] ?>">Kích hoạt lại</a>
 							<a class="btn btn-danger" href="index.php?action=admin-page&act=findContactDeleted&get=delete&id=<?= $get['maLH'] ?>">Tạm biệt</a>
 						</td>
